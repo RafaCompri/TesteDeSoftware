@@ -104,7 +104,7 @@ public class AdicionarAlunoTeste {
 		assertEquals("11992366841", alunoDao.get(aluno).getFiliado().getTelefone1());
 		assertEquals("Kleginaldo Rossi", alunoDao.get(aluno).getProfessor().getFiliado().getNome());
 		assertEquals("Arbos", alunoDao.get(aluno).getEntidade().getNome());
-		a
+		
 		
 	}
 	
