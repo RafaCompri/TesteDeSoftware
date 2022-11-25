@@ -112,7 +112,7 @@ public class AdicionarAlunoTeste {
 	@Test
 	public void ReturnsInvalidData() throws Exception {
 		// Arange
-		clearDatabase();
+		clearDatabase(); 
 
 		filiado = new Filiado();
 		filiado.setNome("Vitorio Lotto");
