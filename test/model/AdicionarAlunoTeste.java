@@ -1,4 +1,4 @@
-package usecases.aluno;
+package model;
 
 import static org.junit.Assert.assertEquals;
 
