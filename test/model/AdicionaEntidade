@@ -1,0 +1,64 @@
+package usecases.entidade;
+
+import static org.junit.Assert.assertEquals;
+
+import java.util.List;
+
+import core.entities.Endereco;
+import core.entities.Entidade;
+import core.validators.EntidadeValidator;
+import infra.interfaces.IDAO;
+import infra.dao.DAO;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import app.utils.DatabaseManager;
+
+public class AddEntidadeTest {
+	
+	private static IDAO<Entidade> entidadeDao;
+	private static Entidade entidade;
+	private static Endereco endereco;
+	
+	@BeforeClass
+	public static void setUp(){
+		DatabaseManager.setEnviroment(DatabaseManager.TEST);
+		
+		
+		
+		entidade = new Entidade();
+		
+		entidade.setNome("Centro de treinamento de Muay-Thai Rodrigo Torres");
+		
+		entidade.setCnpj("11.222.333/11111-4");
+		
+		entidadeDao = new DAO<Entidade>(Entidade.class, new EntidadeValidator(), true);
+	}
+
+	public static void clearDatabase(){
+		List<Entidade> all = entidadeDao.list();
+		for (Entidade each : all) {
+			entidadeDao.delete(each);
+		}
+		assertEquals(0, entidadeDao.list().size());
+	}
+	
+	// Cenário 01
+	@Test
+	public void ReturnsOk() throws Exception {
+		// Arange
+		clearDatabase();
+		
+		// Act
+		boolean isEntidadeSaved = entidadeDao.save(entidade);
+
+		// Assert
+		assertEquals(true, isEntidadeSaved);
+		assertEquals(1, entidadeDao.list().size());
+
+		assertEquals("Arbos", entidadeDao.get(entidade).getNome());
+		
+
+		
+	}
+}
